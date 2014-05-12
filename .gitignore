@@ -1,3 +1,5 @@
 *.o
 *.pyc
 gpepython.so
+Simple
+fftw.wisdom

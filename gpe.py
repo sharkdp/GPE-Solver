@@ -1,6 +1,7 @@
 import math
 import os
-from gpepython import GPEPython #@UnresolvedImport
+from gpepython import GPEPython  # @UnresolvedImport
+
 
 class GPE(GPEPython):
     """Wrapper class to control the GPE program more easily"""
@@ -9,10 +10,10 @@ class GPE(GPEPython):
     DISPERSION_X = 1
     DISPERSION_Y = 2
     DISPERSION_Z = 3
-    PSI_POWER_2 = 4
-    PSI_POWER_6 = 5
-    PSI_0RE	= 6
-    PSI_0IM	= 7
+    PSI_POWER_2  = 4
+    PSI_POWER_6  = 5
+    PSI_0RE      = 6
+    PSI_0IM      = 7
 
     def __init__(self, name):
         """Initialize the GPE Simulation object"""
@@ -41,7 +42,6 @@ class GPE(GPEPython):
         self.setBool("evolutionContact",         True)
         self.setBool("evolutionDipolar",         True)
         self.setBool("evolutionThreeBodyLosses", False)
-        
 
     def __del__(self):
         """Close all data files"""
@@ -64,12 +64,12 @@ class GPE(GPEPython):
     def getDataFile(self, name):
         """returns the file handle of the [name].dat file within the current simulation folder"""
 
-        if not name in self.dataFiles.keys():
+        if name not in self.dataFiles.keys():
             self.dataFiles[name] = open(os.path.join(self.getSimulationFolder(), name + ".dat"), "w")
 
         return self.dataFiles[name]
 
-    def setGridSize(self, sizeX, sizeY = None, sizeZ = None):
+    def setGridSize(self, sizeX, sizeY=None, sizeZ=None):
         """initializes the grid"""
 
         if not sizeY:
@@ -81,7 +81,7 @@ class GPE(GPEPython):
         self.set("sizeY", sizeY)
         self.set("sizeZ", sizeZ)
 
-    def setMax(self, maxX, maxY = None, maxZ = None):
+    def setMax(self, maxX, maxY=None, maxZ=None):
         """set maximum x, y and z position on the grid"""
 
         if not maxY:
@@ -102,7 +102,7 @@ class GPE(GPEPython):
         self.totalSteps = self.totalSteps + steps
         self.time = self.time + self.get("timeStep") * steps
 
-    def evolution(self, steps = 1, monitorSteps = None, plotSteps = None):
+    def evolution(self, steps=1, monitorSteps=None, plotSteps=None):
         """run the simulation for a certain number of steps
         monitor the energy every 'monitorSteps' steps and
         write projections every 'plotSteps' steps"""
@@ -132,13 +132,13 @@ class GPE(GPEPython):
         if s < steps:
             self.evolutionCmd(steps - s)
 
-    def ite(self, steps = 1, monitorSteps = None, plotSteps = None):
+    def ite(self, steps=1, monitorSteps=None, plotSteps=None):
         """run imaginary time evolution"""
 
         self.evolutionType = "ite"
         self.evolution(steps, monitorSteps, plotSteps)
 
-    def rte(self, steps = 1, monitorSteps = None, plotSteps = None):
+    def rte(self, steps=1, monitorSteps=None, plotSteps=None):
         """run real time evolution"""
 
         self.evolutionType = "rte"
@@ -150,7 +150,7 @@ class GPE(GPEPython):
         Epot = self.energyPotential()
         Econ = self.energyContact()
         Edip = self.energyDipolar()
-        
+
         return Ekin + Epot + Econ + Edip
 
     def energyInt(self):
@@ -166,7 +166,7 @@ class GPE(GPEPython):
         Epot = self.energyPotential()
         Econ = self.energyContact()
         Edip = self.energyDipolar()
-        
+
         return 2 * (Ekin - Epot) + 3 * (Econ + Edip)
 
     def energyString(self):
@@ -179,7 +179,7 @@ class GPE(GPEPython):
 
         energies = [Etot, Ekin, Epot, Econ, Edip, Vir]
 
-        string = "{totalSteps:08}\t".format(totalSteps = self.totalSteps)
+        string = "{totalSteps:08}\t".format(totalSteps=self.totalSteps)
         string = string + "\t".join([format(E, " 10.9f") for E in energies]) + "\n"
         return string
 
@@ -194,7 +194,7 @@ class GPE(GPEPython):
         file = self.getDataFile("energies_" + self.evolutionType)
         file.write(string)
         file.flush()
-        
+
         # monitor quantities
         if len(self.quantities) > 0:
             string = self.evaluationString()
@@ -210,26 +210,26 @@ class GPE(GPEPython):
     def write(self, filename):
         """write 1D and 2D projections"""
 
-        path = os.path.join(self.getSimulationFolder(), filename) 
+        path = os.path.join(self.getSimulationFolder(), filename)
 
         GPEPython.write(self, path)
 
     def writePotential(self, filename):
         """write 1D and 2D projections of the external potential"""
 
-        path = os.path.join(self.getSimulationFolder(), filename) 
+        path = os.path.join(self.getSimulationFolder(), filename)
 
         GPEPython.writePotential(self, path)
 
     def plot(self):
         """write 1D and 2D projections with pre-defined name (step_XXXX_...)"""
 
-        self.write("step_{totalSteps:08}_{type}".format(totalSteps = self.totalSteps, type = self.evolutionType))
+        self.write("step_{totalSteps:08}_{type}".format(totalSteps=self.totalSteps, type=self.evolutionType))
 
     def evaluationString(self):
         """Generates a string with all evaluated quantities"""
 
-        string = "{totalSteps:08}\t".format(totalSteps = self.totalSteps)
+        string = "{totalSteps:08}\t".format(totalSteps=self.totalSteps)
         values = []
         for quantity in self.quantities:
             if type(quantity) == str:
@@ -253,7 +253,7 @@ class GPE(GPEPython):
 class HarmonicTrapGPE(GPE):
     """Defines a single harmonic trap simulation with oscillatory units defined by the frequency in z direction."""
 
-    def __init__(self, name, omegaX = 1, omegaY = None, omegaZ = None):
+    def __init__(self, name, omegaX=1, omegaY=None, omegaZ=None):
         GPE.__init__(self, name)
 
         # external potential
@@ -296,7 +296,7 @@ class HarmonicTrapGPE(GPE):
 class LatticeGPE(GPE):
     """Defines a lattice simulation"""
 
-    def __init__(self, name, lSites, lDirection, lDepth, lWidth = 0.5):
+    def __init__(self, name, lSites, lDirection, lDepth, lWidth=0.5):
         """
             lSites:     number of lattice sites
             lDirection: 0, 1, 2 for x, y or z direction
@@ -327,7 +327,7 @@ class LatticeGPE(GPE):
             sigma[i] = math.sqrt(lWidth[i]/(2.0 * math.sqrt(lDepth)))
 
         if lSites > 1:
-            sigmaLat = 1.2 * (lSites - 1) / 2 # enlarge sigma in lattice direction (to load into the lattice)
+            sigmaLat = 1.2 * (lSites - 1) / 2  # enlarge sigma in lattice direction (to load into the lattice)
             sigma[lDirection] = sigmaLat
 
         self.set("sigmaX", sigma[0])
@@ -339,8 +339,7 @@ class LatticeGPE(GPE):
         for i in range(0, 3):
             maxP[i] = 6 * lWidth[i]
 
-        maxPLat = 2.0 + (float(lSites) - 1) / 2 # enlarge the grid in lattice direction 
+        maxPLat = 2.0 + (float(lSites) - 1) / 2  # enlarge the grid in lattice direction
         maxP[lDirection] = maxPLat
 
         self.setMax(maxP[0], maxP[1], maxP[2])
-
