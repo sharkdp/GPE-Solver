@@ -1,6 +1,5 @@
 #include "Simulation.h"
 #include "WavefunctionGaussian.h"
-#include "WavefunctionRandom.h"
 #include "complexType.h"
 #include <fstream>
 
@@ -36,7 +35,6 @@ void Simulation::initialize(bool deleteWavefunction) {
 
     if (deleteWavefunction) {
         // Initialize wavefunction
-//        setWavefunction(new WavefunctionRandom(_sp));
          setWavefunction(new WavefunctionGaussian(_sp));
         _wavefunction->initFourierPlans();
         _wavefunction->initialize();

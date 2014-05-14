@@ -3,7 +3,6 @@
 
 #include "complexType.h"
 #include "Array.h"
-#include "m_rand.h"
 
 class Wavefunction: public Array {
     friend class Array;
