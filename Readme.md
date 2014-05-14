@@ -36,5 +36,14 @@ sim.initialize()
 sim.ite(steps=10000, monitorSteps=500, plotSteps=500)
 ```
 
+## Installation
+Dependencies needed:
+- Recent version of g++ with C++0x and OpenMP support
+- Multi-threaded [fftw3](https://github.com/FFTW/fftw3)
+- [Boost](http://www.boost.org/) with support for Python
+- Works with both Python 2 and 3 (see Makefile, tested with 2.7 and 3.4)
+
+Run `make` in the `gpe` folder.
+
 ## Documentation
 See appendix C of [this thesis](http://www.itp3.uni-stuttgart.de/institut/mitarbeiter/buechlerAG/peter/diplomarbeit.pdf).
