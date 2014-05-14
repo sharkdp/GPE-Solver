@@ -1,11 +1,15 @@
 # Dipolar Gross-Pitaevskii Solver
 
-`gpepython` is a split-step solver for the (dipolar) Gross-Pitaevskii equation. The main part
-of the code is written in C++ and parallelized using OpenMP. The simulation can be controlled
-via a Python interface.
+`gpepython` is a [split-step](http://en.wikipedia.org/wiki/Split-step_method) solver for the (dipolar) [Gross-Pitaevskii equation](http://en.wikipedia.org/wiki/Gross%E2%80%93Pitaevskii_equation). The main part
+of the code is written in C++ and parallelized using [OpenMP](http://en.wikipedia.org/wiki/OpenMP). The simulations can be controlled
+through a Python interface.
 
-Sample simulation `simple.py`:
+![Dipolar Bose gas in a triple-well potential](https://github.com/sharkdp/GPE-Solver/raw/master/triplewell.png)
+
+## Sample simulation
 ``` python
+# simple.py
+
 from gpe import HarmonicTrapGPE, GPE
 
 # Load GPE
@@ -31,3 +35,6 @@ sim.initialize()
 # Imaginary time evolution
 sim.ite(steps=10000, monitorSteps=500, plotSteps=500)
 ```
+
+## Documentation
+See appendix C of [this thesis](http://www.itp3.uni-stuttgart.de/institut/mitarbeiter/buechlerAG/peter/diplomarbeit.pdf).
