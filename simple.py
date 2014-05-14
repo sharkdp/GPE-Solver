@@ -1,4 +1,4 @@
-from gpe import HarmonicTrapGPE, GPE
+from gpe import HarmonicTrapGPE
 
 # Load GPE
 sim = HarmonicTrapGPE("Simple", 1.0, 1.0, 1.0)
