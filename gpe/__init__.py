@@ -114,9 +114,9 @@ class GPE(GPEPython):
             raise Exception("plotSteps should be a multiple of monitorSteps")
 
         s = 0
-        if monitorSteps > 0:
+        if monitorSteps is not None and monitorSteps > 0:
             self.monitor()
-            if plotSteps > 0:
+            if plotSteps is not None and plotSteps > 0:
                 self.plot()
 
             while s < steps:
@@ -125,7 +125,7 @@ class GPE(GPEPython):
 
                 self.monitor()
 
-                if plotSteps and (s % plotSteps == 0):
+                if plotSteps is not None and (s % plotSteps == 0):
                     self.plot()
 
         # simulate the remaining steps
