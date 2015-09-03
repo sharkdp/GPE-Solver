@@ -42,7 +42,6 @@ class Array: public Field {
     void cut1D(string fileName, int direction) const;
     void cut2D(string fileName, int direction) const;
 
-    void cutFourier2D(string fileName, int direction);
     void project1D(string fileName, int direction) const;
     void project2D(string fileName) const;
 

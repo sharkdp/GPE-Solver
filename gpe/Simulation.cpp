@@ -236,9 +236,7 @@ void Simulation::writeDensity(const string filename) const {
     _density->project1D(filename + "_project_y.data", 1);
     _density->project1D(filename + "_project_z.data", 2);
 
-//    _density->projectFourierMatlab2D(filename + "_proj_fourier_matlab_yz.data");
     _density->projectMatlab2D(filename + "_proj_matlab_xz.m");
-//    _density->cutFourier2D(filename + "_cut_fourier_yz.data", 0);
 }
 
 void Simulation::writePotential(const string filename) const {
