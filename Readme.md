@@ -46,4 +46,4 @@ Dependencies needed:
 Run `make` in the `gpe` folder.
 
 ## Documentation
-See appendix C of [this thesis](http://www.itp3.uni-stuttgart.de/institut/mitarbeiter/buechlerAG/peter/diplomarbeit.pdf).
+See appendix C of [this thesis](https://github.com/sharkdp/GPE-Solver/raw/master/doc/thesis.pdf).
